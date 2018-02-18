@@ -241,10 +241,17 @@ int execute(FILE* fp, char* mode) {
         char** filenames = (char**) malloc(10 * sizeof(char*));
         int* args_count = (int*) malloc(10 * sizeof(int));
         
-        if (parseargs(line, &num_cmds, cmds, filenames, args_count) == -1 || num_cmds == 0) {
+        if (parseargs(line, &num_cmds, cmds, filenames, args_count) == -1) {
             cleanup(num_cmds, cmds, filenames, args_count);
             printerr();
             break;
+        }
+
+        if (num_cmds == 0) {
+            cleanup(num_cmds, cmds, filenames, args_count);
+            if (is_int == 0)
+                break;
+            continue;
         }
 
         int num_children = 0;
