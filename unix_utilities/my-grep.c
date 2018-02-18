@@ -27,7 +27,8 @@ int main(int argc, char* argv[]) {
     
     else {
         FILE *fp;
-        for (int i = 2; i < argc; i++) {
+        int i;
+        for (i = 2; i < argc; i++) {
             fp = fopen(argv[i], "r");
             if (fp == NULL) {
                 printf("my-grep: cannot open file\n");
